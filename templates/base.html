@@ -69,28 +69,67 @@
           >
             <li>
               <a
-                href="#"
+                href="{% url 'home' %}"
                 class="block py-2 pl-3 pr-4 text-white bg-sky-700 rounded md:bg-transparent md:text-sky-700 md:p-0 dark:text-white"
                 aria-current="page"
                 >Home</a
               >
             </li>
+            {% if user.is_authenticated %}
             <li>
-              <button
+              <a
+                href=""
+                class="block py-2 pl-3 pr-4 text-white bg-sky-700 rounded md:bg-transparent md:text-sky-700 md:p-0 dark:text-white"
+                aria-current="page"
+                >Car Add</a
+              >
+            </li>
+
+            {% endif %}
+            {% if user.is_authenticated %}
+            <li>
+              <a href="{% url 'profile' %}">
+                <button
+                  type="button"
+                  class="text-white bg-sky-700 hover:bg-sky-800 font-medium rounded-lg text-sm px-4 py-2 text-center"
+                >
+                  Profile
+                </button>
+              </a>
+            </li>
+            <li>
+              <a href={% url 'logout' %}>
+                <button
                 type="button"
                 class="text-white bg-sky-700 hover:bg-sky-800 font-medium rounded-lg text-sm px-4 py-2 text-center"
               >
-                Sign In
+                Logout
               </button>
+              </a>
+            </li>
+            {% else %}
+            <li>
+              <a href="{% url 'register' %}">
+                <button
+                  type="button"
+                  class="text-white bg-sky-700 hover:bg-sky-800 font-medium rounded-lg text-sm px-4 py-2 text-center"
+                >
+                  Register
+                </button>
+              </a>
             </li>
             <li>
-              <button
+              <a href={% url 'login' %}>
+                <button
                 type="button"
                 class="text-white bg-sky-700 hover:bg-sky-800 font-medium rounded-lg text-sm px-4 py-2 text-center"
               >
                 Login
               </button>
+              </a>
             </li>
+
+            {% endif %}
           </ul>
         </div>
       </div>
