@@ -1,0 +1,15 @@
+{% extends "base.html" %} {% load tailwind_filters %} {% load crispy_forms_tags
+%} {% block content %}
+<h1 class="text-2xl text-center mx-auto font-medium border-b-4 w-40">
+  Edit Profile details Page
+</h1>
+<form class="mx-auto w-1/2" method="post">
+  {% csrf_token %} {{ form|crispy }}
+  <button
+    class="bg-sky-600 px-4 py-2 text-white font-bold rounded-lg"
+    style="background-color: turquoise; margin-bottom: 16px"
+  >
+    Submit
+  </button>
+</form>
+{% endblock %}

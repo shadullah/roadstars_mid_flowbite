@@ -4,6 +4,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
+from .models import UserProfile
 
 # Create your views here.
 def register(req):
@@ -34,15 +35,24 @@ def userLogin(req):
 
 @login_required
 def profile(req):
+    # profile_form = forms.RegForm(instance=req.user)
+    try:
+        user_profile = UserProfile.objects.get(user=req.user)
+    except UserProfile.DoesNotExist:
+        user_profile = UserProfile.objects.create(user=req.user)
+
+    return render(req, 'profile.html', {'user_profile': user_profile})
+
+def editProfile(req):
     if req.method == 'POST':
-        profile_form = forms.changeUserinfo(req.POST ,instance=req.user)
-        if profile_form.is_valid():
-            messages.success(req, 'profile updated successfully')
-            profile_form.save()
+        edit_form = forms.changeUserinfo(req.POST, instance=req.user)
+        if edit_form.is_valid():
+            edit_form.save()
             return redirect('profile')
     else:
-        profile_form = forms.RegForm(instance=req.user)
-    return render(req, 'profile.html',{'form': profile_form})
+        edit_form = forms.RegForm(instance=req.user)
+    return render(req, 'edit_profile.html', {'form' : edit_form})
+
 
 def user_logout(req):
     logout(req)
