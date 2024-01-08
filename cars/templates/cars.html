@@ -1,4 +1,7 @@
-{% extends "base.html" %} {% block content %}
+{% extends "base.html" %} 
+{% block content %} 
+{% load tailwind_filters %} 
+{% load crispy_forms_tags %}
 <h1 class="text-5xl text-center mx-auto font-medium my-12">Car Details</h1>
 
 <!-- card start here -->
@@ -38,4 +41,31 @@
     </div>
   </div>
 </div>
-{% comment %} {% endfor %} {% endcomment %} {% endblock %}
+
+{% comment %} comment start here {% endcomment %}
+
+
+<!-- comment div start here -->
+<h1 class="text-center">Total comments: {{comments | length}}</h1>
+<h1 class="text-center text-2xl font-medium mt-6">Comment here:</h1>
+<div class="m-3">
+  {% for comment in comments %}
+  <div class="text-sm bg-gray-500 m-3 p-5 rounded-lg text-white">
+      <p><b class="mr-3">{{comment.name}}</b>{{comment.created_on}}</p>
+      <p class="text-xl">{{comment.body}}</p>
+  </div>
+  {% endfor %}
+</div>
+
+<!-- comment box start here -->
+<form class="m-5 p-12" method="post">
+  {% csrf_token %} 
+  
+  {{ comment_form |crispy }}
+  <button class="bg-sky-600 px-3 py-2 text-black font-bold rounded-lg my-3">
+    Submit
+  </button>
+</form>
+
+{% comment %} {% endfor %} {% endcomment %} 
+{% endblock %}

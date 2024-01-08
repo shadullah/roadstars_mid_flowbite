@@ -15,8 +15,11 @@ class Cars(models.Model):
         return self.car
 
 
-# img
-# car name
-# car price``
-# brand name
-# view details
+class Comment(models.Model):
+    cars = models.ForeignKey(Cars, on_delete = models.CASCADE, related_name='comments')
+    name = models.CharField(max_length = 30)
+    body = models.TextField()
+    created_on = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
