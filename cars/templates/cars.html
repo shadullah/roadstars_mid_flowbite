@@ -47,7 +47,7 @@
 
 <!-- comment div start here -->
 <h1 class="text-center">Total comments: {{comments | length}}</h1>
-<h1 class="text-center text-2xl font-medium mt-6">Comment here:</h1>
+
 <div class="m-3">
   {% for comment in comments %}
   <div class="text-sm bg-gray-500 m-3 p-5 rounded-lg text-white">
@@ -56,7 +56,7 @@
   </div>
   {% endfor %}
 </div>
-
+<h1 class="text-center text-2xl font-medium mt-6">Comment here:</h1>
 <!-- comment box start here -->
 <form class="m-5 p-12" method="post">
   {% csrf_token %} 

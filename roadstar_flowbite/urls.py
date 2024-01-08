@@ -28,6 +28,7 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('users/', include('users.urls')),
     path('cars/', include('cars.urls')),
+    path('category/<slug:brand_slug>/', views.home, name='brand_wise'),
     path('category/', include('categories.urls')),
 ]
 
